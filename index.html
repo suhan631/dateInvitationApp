@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date With Me ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:380px;
+    background:#fff;
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    animation:pop .4s ease;
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+h1{
+    font-size:32px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+p{
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.label{
+    display:block;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+    color:#444;
+    margin-bottom:6px;
+    margin-top:12px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border-radius:14px;
+    border:1px solid #ddd;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#ff4f81;
+    box-shadow:0 0 8px rgba(255,79,129,.2);
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:18px;
+    transition:.25s;
+}
+
+.yes{
+    background:#ff4f81;
+    color:white;
+}
+
+.yes:hover{
+    background:#ff2d68;
+}
+
+.no{
+    background:#ececec;
+    color:#444;
+}
+
+.no:hover{
+    background:#ddd;
+}
+
+.hidden{
+    display:none;
+}
+
+.success{
+    text-align:center;
+}
+
+.success h2{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.info{
+    margin-top:20px;
+    background:#fff5f8;
+    padding:18px;
+    border-radius:16px;
+    text-align:left;
+    line-height:1.8;
+    font-size:17px;
+}
+
+.footer{
+    margin-top:25px;
+    color:#888;
+    font-size:14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <!-- Step 1 -->
+    <div id="step1">
+
+        <h1>❤️</h1>
+
+        <p><strong>Hey Ema! Will you go on a date with me?</strong></p>
+
+        <button class="yes" onclick="nextStep()">Yes 💖</button>
+
+        <button class="no" onclick="noAnswer()">No 😢</button>
+
+    </div>
+
+    <!-- Step 2 -->
+    <div id="step2" class="hidden">
+
+        <h1>Yay! 🎉</h1>
+
+        <p>Let's plan our date.</p>
+
+        <label for="date" class="label">📅 Select Date</label>
+        <input type="date" id="date">
+
+        <label for="time" class="label">⏰ Select Time</label>
+        <input type="time" id="time">
+
+        <label for="food" class="label">🍽️ What would you like to eat?</label>
+        <input
+            type="text"
+            id="food"
+            placeholder="Example: Pizza, Burger, Ice-Cream...">
+
+        <button class="yes" onclick="finish()">Confirm Date ❤️</button>
+
+    </div>
+
+    <!-- Step 3 -->
+    <div id="step3" class="hidden success">
+
+        <h2>🥰 It's a Date!</h2>
+
+        <div class="info" id="summary"></div>
+
+        <div class="footer">
+            Can't wait to see you ❤️
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function nextStep(){
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
+}
+
+function noAnswer(){
+    alert("Aww... Maybe another time ❤️");
+}
+
+function finish(){
+
+    const date=document.getElementById("date").value;
+    const time=document.getElementById("time").value;
+    const food=document.getElementById("food").value.trim();
+
+    if(date==="" || time==="" || food===""){
+        alert("Please complete all fields 😊");
+        return;
+    }
+
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+
+    document.getElementById("summary").innerHTML=`
+        <strong>📅 Date:</strong> ${date}<br><br>
+        <strong>⏰ Time:</strong> ${time}<br><br>
+        <strong>🍽️ Food:</strong> ${food}<br><br>
+        💖 Looking forward to spending time together!
+    `;
+}
+
+</script>
+
+</body>
+</html>
